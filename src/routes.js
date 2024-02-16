@@ -1,6 +1,7 @@
 import express from "express";
 
 import { GetAlunos, PostAluno } from './Controllers/Alunos';
+import { GetProdutos, PostProduto } from './Controllers/Produtos';
 
 const routes = express.Router();
 

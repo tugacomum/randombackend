@@ -1,16 +1,21 @@
-import mongoose, { Schema } from "mongoose";
+import Produto from "../Models/Produto";
  
-const Produto = new Schema({
-    nome: {
-        type: String,
-        required: true
-    },
-    preco: {
-        type: Number,
-        required: true
+export async function GetProdutos(req, res){
+    try {
+        const produtos = await Produto.find({});
+        res.send(produtos);
+    } catch (error) {
+        return res.status(400).json({ error });
     }
-},
-    { timestamps: true }
-);
+}
  
-export default mongoose.model('Produtos', Produto);
+export async function PostProduto(req, res){
+    try {
+        const params = req.body;
+        const produto = await Produto.create({...params});
+        await produto.save();
+        res.send(produto);
+    } catch (error) {
+        return res.status(400).json({ error });
+    }
+}
